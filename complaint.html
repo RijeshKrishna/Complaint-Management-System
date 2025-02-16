@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Complaint - CMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light text-dark">
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark bg-primary shadow-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand animate__animated animate__fadeInLeft" href="dashboard.html">
+                <i class="fas fa-tasks me-2"></i>CMS
+            </a>
+            <div class="d-flex">
+                <a href="dashboard.html" class="btn btn-light me-3">
+                    <i class="fas fa-home me-2"></i>Dashboard
+                </a>
+                <button class="btn btn-danger btn-hover-glow animate__animated animate__fadeInRight" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt me-2"></i>Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5 pt-5">
+        <!-- Title Section -->
+        <div class="text-center mb-4 animate__animated animate__fadeInDown">
+            <h1 class="display-4 text-primary">File a New Complaint</h1>
+            <p class="lead text-muted">We're here to help resolve your concerns</p>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="progress mb-4 animate__animated animate__fadeInUp" style="height: 3px;">
+            <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+        </div>
+
+        <!-- Complaint Form Section -->
+        <div class="card glass-card hover-scale shadow-lg border-0 animate__animated animate__fadeInUp">
+            <div class="card-body p-4">
+                <form id="complaintForm" class="needs-validation" novalidate>
+                    <!-- Personal Information -->
+                    <div class="row mb-4">
+                        <div class="col-12 mb-3">
+                            <h4><i class="fas fa-user me-2"></i>Personal Information</h4>
+                            <hr>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                            <div class="invalid-feedback">Please provide your name.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" required>
+                            <div class="invalid-feedback">Please provide a valid email.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="contact" class="form-label">Contact Number</label>
+                            <input type="tel" class="form-control" id="contact" required>
+                            <div class="invalid-feedback">Please provide your contact number.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" required>
+                            <div class="invalid-feedback">Please provide your address.</div>
+                        </div>
+                    </div>
+
+                    <!-- Complaint Details -->
+                    <div class="row mb-4">
+                        <div class="col-12 mb-3">
+                            <h4><i class="fas fa-clipboard-list me-2"></i>Complaint Details</h4>
+                            <hr>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="category" class="form-label">Complaint Category</label>
+                            <select class="form-select" id="category" required>
+                                <option value="">Select Category</option>
+                                <option value="water">Water Supply</option>
+                                <option value="electricity">Electricity</option>
+                                <option value="waste">Waste Management</option>
+                                <option value="road">Road Maintenance</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <div class="invalid-feedback">Please select a category.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="priority" class="form-label">Priority Level</label>
+                            <select class="form-select" id="priority" required>
+                                <option value="">Select Priority</option>
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                                <option value="urgent">Urgent</option>
+                            </select>
+                            <div class="invalid-feedback">Please select a priority level.</div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" class="form-control" id="subject" required>
+                            <div class="invalid-feedback">Please provide a subject.</div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="description" class="form-label">Detailed Description</label>
+                            <textarea class="form-control" id="description" rows="4" maxlength="500" required></textarea>
+                            <div class="d-flex justify-content-between mt-1">
+                                <small class="text-muted">Provide detailed information about your complaint</small>
+                                <small id="charCount">0/500</small>
+                            </div>
+                            <div class="invalid-feedback">Please provide a description.</div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <label for="attachments" class="form-label">Attachments (Optional)</label>
+                            <input type="file" class="form-control" id="attachments" multiple>
+                            <small class="text-muted">Upload relevant images or documents (Max 5MB each)</small>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Submit -->
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="terms" required>
+                                <label class="form-check-label" for="terms">
+                                    I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
+                                </label>
+                                <div class="invalid-feedback">You must agree before submitting.</div>
+                            </div>
+                        </div>
+                        <div class="col-12 text-center">
+                            <button type="button" class="btn btn-secondary me-2" onclick="window.location.href='dashboard.html'">
+                                <i class="fas fa-times me-2"></i>Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane me-2"></i>Submit Complaint
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Terms and Conditions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>By submitting this complaint, you agree to:</p>
+                    <ul>
+                        <li>Provide accurate and truthful information</li>
+                        <li>Allow us to investigate and process your complaint</li>
+                        <li>Be contacted regarding your complaint</li>
+                        <li>Our privacy policy and data handling practices</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I Understand</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-5 py-4 bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>About CMS</h5>
+                    <p class="text-muted">A modern complaint management system designed to streamline customer service and improve response times.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted">Home</a></li>
+                        <li><a href="#" class="text-muted">FAQs</a></li>
+                        <li><a href="#" class="text-muted">Support</a></li>
+                        <li><a href="#" class="text-muted">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li><i class="fas fa-envelope me-2"></i>support@cms.com</li>
+                        <li><i class="fas fa-phone me-2"></i>+1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i>123 Business Ave, Suite 100</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 mb-3">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; 2025 Complaint Management System. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-muted me-3"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-muted me-3"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-muted me-3"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="text-muted"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/complaint.js"></script>
+</body>
+</html>

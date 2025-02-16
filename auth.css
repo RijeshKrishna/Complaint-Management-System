@@ -1,0 +1,137 @@
+/* Base styles */
+.auth-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.form-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.form-switch {
+  cursor: pointer;
+  color: #667eea;
+  text-decoration: none;
+}
+
+/* Animations */
+.auth-container {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.form-card {
+  animation: slideUp 0.6s ease-out;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  display: none;
+}
+
+/* Input animations */
+.form-control {
+  transition: all 0.3s ease;
+  border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
+  border-color: #667eea;
+}
+
+/* Button animations */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Form switch animations */
+.form-switch {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.form-switch::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: #667eea;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.form-switch:hover {
+  opacity: 0.8;
+}
+
+.form-switch:hover::after {
+  transform: scaleX(1);
+}
+
+/* Spinner animation */
+.spinner-border {
+  animation: rotation 1s linear infinite;
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+      opacity: 0;
+      transform: translateY(30px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+@keyframes rotation {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+/* Error animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+  animation: shake 0.6s ease-in-out;
+}

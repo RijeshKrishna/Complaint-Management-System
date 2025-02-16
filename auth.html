@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        .form-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .form-switch {
+            cursor: pointer;
+            color: #667eea;
+            transition: opacity 0.3s;
+        }
+        .form-switch:hover {
+            opacity: 0.8;
+        }
+        .role-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .role-toggle button {
+            margin: 0 10px;
+            padding: 5px 15px;
+            border: none;
+            border-radius: 20px;
+            background: #e0e0e0;
+            color: #333;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+        .role-toggle button.active {
+            background: #667eea;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container d-flex align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <!-- Role Toggle -->
+                    <div class="role-toggle">
+                        <button id="userRoleBtn" class="active" onclick="switchRole('user')">User Login</button>
+                        <button id="adminRoleBtn" onclick="switchRole('admin')">Admin Login</button>
+                    </div>
+
+                    <!-- Login Form -->
+                    <div class="form-card p-5 mb-4" id="loginForm">
+                        <h2 class="text-center mb-4">Welcome Back</h2>
+                        <form id="loginForm" onsubmit="handleAuth(event, 'login')">
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Email" required>
+                            </div>
+                            <div class="mb-4">
+                                <input type="password" class="form-control" placeholder="Password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 py-2">
+                                <span>Login</span>
+                                <div class="spinner-border spinner-border-sm d-none" role="status"></div>
+                            </button>
+                        </form>
+                        <p class="text-center mt-3">
+                            New user? 
+                            <a class="form-switch" onclick="switchForm('signup')">Create account</a>
+                        </p>
+                    </div>
+
+                    <!-- Signup Form -->
+                    <div class="form-card p-5 d-none" id="signupForm">
+                        <h2 class="text-center mb-4">Get Started</h2>
+                        <form id="signupForm" onsubmit="handleAuth(event, 'signup')">
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Full Name" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Email" required>
+                            </div>
+                            <div class="mb-4">
+                                <input type="password" class="form-control" placeholder="Password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 py-2">
+                                <span>Sign Up</span>
+                                <div class="spinner-border spinner-border-sm d-none" role="status"></div>
+                            </button>
+                        </form>
+                        <p class="text-center mt-3">
+                            Existing user? 
+                            <a class="form-switch" onclick="switchForm('login')">Login here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentRole = 'user'; // Default role is user
+
+        // Switch between User and Admin roles
+        function switchRole(role) {
+            currentRole = role;
+            const userBtn = document.getElementById('userRoleBtn');
+            const adminBtn = document.getElementById('adminRoleBtn');
+
+            if (role === 'user') {
+                userBtn.classList.add('active');
+                adminBtn.classList.remove('active');
+            } else {
+                adminBtn.classList.add('active');
+                userBtn.classList.remove('active');
+            }
+        }
+
+        // Switch between Login and Signup forms
+        function switchForm(formType) {
+            document.querySelectorAll('.form-card').forEach(form => {
+                form.classList.add('d-none');
+            });
+            document.getElementById(formType + 'Form').classList.remove('d-none');
+        }
+
+        // Handle form submission
+        function handleAuth(event, action) {
+            event.preventDefault();
+            const btn = event.target.querySelector('button');
+            const spinner = btn.querySelector('.spinner-border');
+            const btnText = btn.querySelector('span');
+
+            // Show loading state
+            btn.disabled = true;
+            btnText.classList.add('d-none');
+            spinner.classList.remove('d-none');
+
+            // Simulate API call
+            setTimeout(() => {
+                // Store authentication token and role
+                localStorage.setItem('authToken', 'dummy-token-123');
+                localStorage.setItem('role', currentRole);
+
+                // Redirect based on role
+                if (currentRole === 'admin') {
+                    window.location.href = 'admin.html';
+                } else {
+                    window.location.href = 'dashboard.html';
+                }
+            }, 1500);
+        }
+    </script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
